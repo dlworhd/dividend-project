@@ -1,5 +1,6 @@
 package com.zerobase.bdg.service;
 
+import com.zerobase.bdg.exception.NoCompanyException;
 import com.zerobase.bdg.model.Company;
 import com.zerobase.bdg.model.Dividend;
 import com.zerobase.bdg.model.ScrapedResult;
@@ -29,7 +30,7 @@ public class FinanaceService {
 	// 자주 변경되는 데이터인가? -> 업데이트 때마다 캐시에 있는 데이터도 업데이트 해야 함 (배당금은 잘 안 바뀜)
 	@Cacheable(key = "#companyName", value = CacheKey.KEY_FINANCE) // key와 value는 redis 서버의 key value 랑 다름
 	public ScrapedResult getDividendByCompanyName(String companyName){
-		CompanyEntity company = companyRepository.findByName(companyName).orElseThrow(() -> new RuntimeException("회사가 존재하지 않습니다."));
+		CompanyEntity company = companyRepository.findByName(companyName).orElseThrow(() -> new NoCompanyException());
 		List<DividendEntity> dividendEntities = dividendRepository.findAllByCompanyId(company.getId());
 
 		List<Dividend> dividendList = dividendEntities.stream().map(

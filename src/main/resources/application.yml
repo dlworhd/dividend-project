@@ -3,6 +3,7 @@ spring:
     name: dividend
 
 
+
   h2:
     console:
       enabled: true # UI 사용 여부
@@ -28,6 +29,9 @@ spring:
   redis:
     host: localhost
     port: 6379
+
+  jwt:
+    secret: MGNhYjZkMzZhNjhiNzc1M2YzNTY1MjJlNTEyOTA2NmY0MGU1OGNlOWJiMmRiZGY1ZGI3YjY0NzgxMzUzMjdmMzU1ZTJlY2U1YzM0ZmYzMzk0NmRjNjAxZjBjMTAxZjYyMDNmNGQ1MmQ3YmEzMGFhN2MyZDFjMjQyODczMTBmMDQ=
 
 scheduler:
   scrap:

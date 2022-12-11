@@ -1,5 +1,6 @@
 package com.zerobase.bdg.service;
 
+import com.zerobase.bdg.exception.NoCompanyException;
 import com.zerobase.bdg.model.Company;
 import com.zerobase.bdg.model.ScrapedResult;
 import com.zerobase.bdg.persist.CompanyRepository;
@@ -86,4 +87,15 @@ public class CompanyService {
 	public void deleteAutocompleteKeyword(String keyword){
 		this.trie.remove(keyword);
 	}
+
+	public String deleteCompany(String ticker){
+
+		var company = companyRepository.findByTicker(ticker).orElseThrow(() -> new NoCompanyException());
+		this.dividendRepository.deleteAllByCompanyId(company.getId());
+		this.companyRepository.delete(company);
+		this.deleteAutocompleteKeyword(company.getName());
+
+		return company.getName();
+	}
+
 }

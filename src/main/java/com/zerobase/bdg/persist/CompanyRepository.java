@@ -13,4 +13,6 @@ boolean existsByTicker(String ticker);
 Optional<CompanyEntity> findByName(String companyName);
 
 Page<CompanyEntity> findByNameStartingWithIgnoreCase(String s, Pageable pageable);
+
+Optional<CompanyEntity> findByTicker(String ticker);
 }
